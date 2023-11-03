@@ -9,7 +9,7 @@ paths:
   /books:
     get:
       summary: Get all books 
-      description: Return all books order by author name asc
+      description: The returned books are ordered by updated datetime.
       parameters: 
         - in: query
           name: bookName
@@ -46,6 +46,45 @@ paths:
                 items:
                   $ref: '#/components/schemas/Book'
   /authors:
+    get: 
+      summary: Get all authors
+      description: Show all authors filter by  name.
+      operationId: getAuthors
+      parameters:
+        - in: query
+          name: authorName
+          description: Filter return authors by given name
+          required: false
+          schema: 
+            type: string
+      responses:
+        200:
+          description: Authors filtered
+          content:
+            application/json:
+              schema :
+                type: array
+                items:
+                  $ref: '#/components/schemas/author'
+    put:
+      summary: Create || update a author
+      operationId: crupdateAuthors
+      requestBody:
+        content:
+          application/json:
+            schema : 
+              type: array
+              items:
+                $ref: '#/components/schemas/author'
+      responses:
+        200:
+          description: The list of created or updated books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/author'
 components:
   schemas:
     Book:
