@@ -17,6 +17,20 @@ paths:
           required: false
           schema:
             type: string
+        - in: query
+          name: releaseDateStart
+          description: Filter books with a release date greater than or equal to this date
+          required: false
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: releaseDateEnd
+          description: Filter books with a release date less than or equal to this date
+          required: false
+          schema:
+            type: string
+            format: date
       responses:
         200:
           description: The list of filtered books
@@ -66,6 +80,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/author'
+        404:
+          description: not found !
     put:
       summary: Create || update a author
       operationId: crupdateAuthors
@@ -85,6 +101,15 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/author'
+        404:
+          description: Not found !
+    delete:
+      summary: Delete list of authors
+      responses:
+        200:
+          description: Deleting author successfully !
+        404: 
+          description: Author Not found
 components:
   schemas:
     Book:
